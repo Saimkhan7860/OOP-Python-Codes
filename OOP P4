@@ -1,0 +1,92 @@
+#Error Handling
+
+class BankAccount:
+    def __init__(self, balance=0):
+        self.set_balance(balance)
+        self.set_transaction_history([])
+
+    # Getter and setter for balance
+    def get_balance(self):
+        return self.balance
+
+    def set_balance(self, balance):
+        assert isinstance(balance, int), "You must enter a number"
+        assert balance >= 0, "Balance cannot be negative"
+        self.balance = balance
+        
+    # Getter and setter for transaction history
+    def get_transaction_history(self):
+        return self.transaction_history
+
+    def set_transaction_history(self, transaction_history):
+        self.transaction_history = transaction_history
+        
+    # Method to get average transaction
+    def get_avg_transaction(self):
+        assert self.transaction_history, "No transactions have been made"
+        total_transactions = sum(self.transaction_history)
+        avg_transaction = total_transactions / len(self.transaction_history)
+        return avg_transaction
+    
+    # Method to deposit money
+    def deposit(self, amount):
+        assert isinstance(amount, int), "You must enter a number"
+        assert amount > 0, "Amount must be greater than 0"
+        self.set_balance(self.get_balance() + amount)
+        self.transaction_history.append(amount)
+        
+    # Method to withdraw money
+    def withdraw(self, amount):
+        assert isinstance(amount, int), "You must enter a number"
+        assert amount > 0, "Amount must be greater than 0"
+        assert amount <= self.get_balance(), "Not enough balance to withdraw"
+        self.set_balance(self.get_balance() - amount)
+        self.transaction_history.append(-amount)
+
+# Test the class
+if __name__ == '__main__':
+    # Creating the bank account
+    bank_account = BankAccount(200)
+
+    # Getting the average transactions (first time)
+    try:
+        print("Getting the average transactions (first time)")
+        print(bank_account.get_avg_transaction())
+    except AssertionError as e:
+        print("Error:", str(e))
+
+    # Depositing money
+    try:
+        print("\nDepositing money")
+        bank_account.deposit(-50)
+    except AssertionError as e:
+        print("Error:", str(e))
+
+    try:
+        print("\nDepositing money")
+        bank_account.deposit("abc")
+    except AssertionError as e:
+        print("You must enter a number")
+
+    # Withdrawing money
+    try:
+        print("\nWithdrawing money")
+        bank_account.withdraw("abc")
+    except AssertionError as e:
+        print("You must enter a number")
+
+    try:
+        print("\nWithdrawing money")
+        bank_account.withdraw(300)
+    except AssertionError as e:
+        print("Error:", str(e))
+
+    # Getting the average transactions (second time)
+    try:
+        print("\nGetting the average transactions (second time)")
+        print(bank_account.get_avg_transaction())
+    except AssertionError as e:
+        print("Error:", str(e))
+
+    # Check balance
+    print("\nBalance: ", bank_account.get_balance())
