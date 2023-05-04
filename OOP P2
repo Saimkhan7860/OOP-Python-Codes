@@ -1,0 +1,54 @@
+class Dwelling:
+    def __init__(self, typeOfDwelling, value, rooms):
+        self.typeOfDwelling = typeOfDwelling
+        self.value = value
+        self.rooms = rooms
+
+    def printData(self):
+        print("Value:", self.value)
+        print("Rooms:", self.rooms)
+
+    def get_dwellingType(self):
+        return "Dwelling Type:" + self.typeOfDwelling
+
+    def __str__(self):
+        return "Value:{}\nRooms:{}".format(self.value, self.rooms)
+
+class House(Dwelling):
+    def __init__(self, typeOfDwelling, value, rooms, address, numOfFloors):
+        Dwelling.__init__(self, typeOfDwelling, value, rooms)
+        self.address = address
+        self.numOfFloors = numOfFloors
+
+    def printData(self):
+        Dwelling.printData(self)
+        print("Address:", self.address)
+        print("NumberOfFloors:", self.numOfFloors)
+
+    def __str__(self):
+        return "Value:{}\nRooms:{}\nAddress:{}\nNumberOfFloors:{}".format(self.value, self.rooms, self.address, self.numOfFloors)
+
+class Apartment(Dwelling):
+    def __init__(self, typeOfDwelling, value, rooms, address, apartmentNumber):
+        Dwelling.__init__(self, typeOfDwelling, value, rooms)
+        self.address = address
+        self.apartmentNumber = apartmentNumber
+
+    def printData(self):
+        Dwelling.printData(self)
+        print("Address:", self.address)
+        print("ApartmentNumber:", self.apartmentNumber)
+
+    def __str__(self):
+        return "Value:{}\nRooms:{}\nAddress:{}\nApartmentNumber:{}".format(self.value, self.rooms, self.address, self.apartmentNumber)
+
+house = House("House", 800, 100, "1911 Simcoe St", 4)
+apartment = Apartment("Apartment", 500, 1, "100 York St", 3087)
+
+print(house.get_dwellingType())
+house.printData()
+print(house)
+
+print(apartment.get_dwellingType())
+apartment.printData()
+print(apartment)
