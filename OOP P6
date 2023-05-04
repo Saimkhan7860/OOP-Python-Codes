@@ -1,0 +1,47 @@
+class Information:
+#private variables
+  def __init__(self, name, age, phoneNumber, address="unknown"):
+    self.__name = name 
+    self.__age = age
+    self.__address = address
+    self.__phoneNumber = phoneNumber
+
+  def set_name(self, name): 
+    self.__name = name 
+  
+  def get_name(self): 
+    return self.__name 
+
+  def set_age(self, age): 
+    self.__age = age 
+  
+  def get_age(self): 
+    return self.__age 
+
+  def set_address(self, address): 
+    self.__address = address 
+  
+  def get_address(self): 
+    return self.__address 
+
+  def set_phoneNumber(self, phoneNumber): 
+    self.__phoneNumber = phoneNumber 
+  
+  def get_phoneNumber(self): 
+    return self.__phoneNumber 
+
+  def __str__(self):
+    return "name: "+ self.__name + " -age:"+str(self.__age)+" -address:"+self.__address
+    
+def display_info(info):
+  print("Name: " + info.get_name())
+  print("Age: ",end="")
+  print(info.get_age())
+  print("Address: " + info.get_address())
+  print("Phone: " + info.get_phoneNumber())
+
+#Description
+if __name__=='__main__':
+  h1 = Information("Sarah Jones", 21, '+1 9123405999', "2000 Simcoe North")
+  print(h1)
+  display_info(h1)
