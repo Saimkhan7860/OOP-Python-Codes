@@ -1,0 +1,103 @@
+class Vehicle():
+
+    def __init__(self,maufacturer="",model="",wheels=0,type="",seats=0):
+        self.manufacturer=maufacturer
+        self.model=model
+        self.wheels=wheels
+        self.seats=seats
+
+    def printDetails(self):
+        print('Manufacturer:',self.manufacturer,'Model:',self.model,'Wheels:',self.wheels,'Seats:',self.seats)
+
+    def checkInfo(self,**kwargs):
+        pass
+
+
+class Car(Vehicle):
+    def __init__(self,maufacturer="",model="",wheels=0,type="",seats=0):
+        super().__init__(maufacturer, model, wheels, type, seats)
+        print('A car was created')
+
+    def checkInfo(self,**kwargs):
+        for key,value in kwargs.items():
+            if key.lower()=='maufacturer':
+                return self.manufacturer==value
+            elif key.lower()=='model':
+                return self.model==value
+            elif key.lower()=='wheels':
+                return self.wheels==value
+            elif key.lower()=='seats':
+                return self.seats==value
+            else:
+                return False
+
+class Truck(Vehicle):
+    def __init__(self,maufacturer="",model="",wheels=0,type="",seats=0):
+        super().__init__(maufacturer,model,wheels,type,seats)
+        print('A truck was created')
+
+    def checkInfo(self,**kwargs):
+        for key,value in kwargs.items():
+            if key.lower()=='maufacturer':
+                return self.manufacturer==value
+            elif key.lower()=='model':
+                return self.model==value
+            elif key.lower()=='wheels':
+                return self.wheels==value
+            elif key.lower()=='seats':
+                return self.seats==value
+            else:
+                return False
+
+class Motorcycle(Vehicle):
+    def __init__(self,maufacturer="",model="",wheels=0,type="",seats=0):
+        super().__init__(maufacturer, model, wheels, type, seats)
+        print('A motorcycle was created')
+
+    def checkInfo(self,**kwargs):
+        for key,value in kwargs.items():
+            if key.lower()=='maufacturer':
+                return self.manufacturer==value
+            elif key.lower()=='model':
+                return self.model==value
+            elif key.lower()=='wheels':
+                return self.wheels==value
+            elif key.lower()=='seats':
+                return self.seats==value
+            else:
+                return False
+
+import random
+def main():
+    manufacturers=['Toyota','Porshe','BMW','Mercedes','Honda']
+    dict_vehicles={'Car':[2,3,4,5],'Truck':[2,3,4],
+                   'Motorcycle':[1,2]}
+    totals={'Car':0,'Truck':0,'Motorcycle':0}
+    vehicles=[]
+    for _ in range(100):
+        random_vehicle=random.randint(1,3)
+        if random_vehicle==1:
+            random_manufacturer=random.randint(0,len(manufacturers)-1)
+            random_wheels = random.randint(0,len(dict_vehicles.get('Car'))-1)
+            car = Car(manufacturers[random_manufacturer],'Classic',dict_vehicles.get('Car')[random_wheels],"",random_wheels)
+            totals['Car']+=1
+            vehicles.append(car)
+        elif random_vehicle==2:
+            random_manufacturer = random.randint(0, len(manufacturers) - 1)
+            random_wheels = random.randint(0, len(dict_vehicles.get('Truck')) - 1)
+            tr = Truck(manufacturers[random_manufacturer], 'Classic', dict_vehicles.get('Truck')[random_wheels], "",
+                    random_wheels)
+            totals['Truck'] += 1
+            vehicles.append(tr)
+        elif random_vehicle==3:
+            random_manufacturer = random.randint(0, len(manufacturers) - 1)
+            random_wheels = random.randint(0, len(dict_vehicles.get('Motorcycle')) - 1)
+            mc = Motorcycle(manufacturers[random_manufacturer], 'Classic', dict_vehicles.get('Motorcycle')[random_wheels], "",
+                    random_wheels)
+            totals['Motorcycle'] += 1
+            vehicles.append(mc)
+    for vehicle in vehicles:
+        vehicle.printDetails()
+
+if __name__ == '__main__':
+    main()
